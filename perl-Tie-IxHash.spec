@@ -4,25 +4,26 @@
 #
 Name     : perl-Tie-IxHash
 Version  : 1.23
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Tie-IxHash-1.23.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Tie-IxHash-1.23.tar.gz
 Summary  : ordered associative arrays for Perl
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
-Requires: perl-Tie-IxHash-man
+BuildRequires : buildreq-cpan
 
 %description
 implements ordered in-memory associative arrays.
 It requires:
 Perl Version 5.005 or later.
 
-%package man
-Summary: man components for the perl-Tie-IxHash package.
-Group: Default
+%package dev
+Summary: dev components for the perl-Tie-IxHash package.
+Group: Development
+Provides: perl-Tie-IxHash-devel = %{version}-%{release}
 
-%description man
-man components for the perl-Tie-IxHash package.
+%description dev
+dev components for the perl-Tie-IxHash package.
 
 
 %prep
@@ -51,9 +52,9 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -62,8 +63,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Tie/IxHash.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Tie/IxHash.pm
 
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Tie::IxHash.3
