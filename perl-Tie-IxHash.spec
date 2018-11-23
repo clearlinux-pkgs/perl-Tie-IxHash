@@ -4,7 +4,7 @@
 #
 Name     : perl-Tie-IxHash
 Version  : 1.23
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Tie-IxHash-1.23.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Tie-IxHash-1.23.tar.gz
 Summary  : ordered associative arrays for Perl
