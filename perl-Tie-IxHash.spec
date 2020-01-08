@@ -4,12 +4,13 @@
 #
 Name     : perl-Tie-IxHash
 Version  : 1.23
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Tie-IxHash-1.23.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Tie-IxHash-1.23.tar.gz
 Summary  : ordered associative arrays for Perl
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
+Requires: perl-Tie-IxHash-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -21,19 +22,30 @@ Perl Version 5.005 or later.
 Summary: dev components for the perl-Tie-IxHash package.
 Group: Development
 Provides: perl-Tie-IxHash-devel = %{version}-%{release}
+Requires: perl-Tie-IxHash = %{version}-%{release}
 
 %description dev
 dev components for the perl-Tie-IxHash package.
 
 
+%package perl
+Summary: perl components for the perl-Tie-IxHash package.
+Group: Default
+Requires: perl-Tie-IxHash = %{version}-%{release}
+
+%description perl
+perl components for the perl-Tie-IxHash package.
+
+
 %prep
 %setup -q -n Tie-IxHash-1.23
+cd %{_builddir}/Tie-IxHash-1.23
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -43,7 +55,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -63,8 +75,11 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Tie/IxHash.pm
 
 %files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Tie::IxHash.3
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Tie/IxHash.pm
