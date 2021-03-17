@@ -4,7 +4,7 @@
 #
 Name     : perl-Tie-IxHash
 Version  : 1.23
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Tie-IxHash-1.23.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Tie-IxHash-1.23.tar.gz
 Summary  : ordered associative arrays for Perl
@@ -82,4 +82,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.3/Tie/IxHash.pm
+/usr/lib/perl5/vendor_perl/5.32.1/Tie/IxHash.pm
